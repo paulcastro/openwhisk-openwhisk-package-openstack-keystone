@@ -1,4 +1,4 @@
-# wsk-pkg-openstack-keystone
+# OpenWhisk Package for Keystone
 A package to interact with OpenStack Keystone.
 
 ## Actions
