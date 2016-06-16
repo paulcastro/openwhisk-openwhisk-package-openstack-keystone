@@ -26,6 +26,12 @@ var url = require('url')
 
 function main(params) {
 
+    if (!params.userId || !params.password || !params.projectId || !params.host || !params.port || !params.endpointName) {
+        return whisk.error("Missing required parameters")
+    }
+
+    console.log('getApiToken. Params '+JSON.stringify(params))
+
     var userId = params.userId
     var password = params.password
     var projectId = params.projectId
@@ -34,13 +40,14 @@ function main(params) {
     var port = params.port
     var endpointName = params.endpointName
 
-    if (!params.userId || !params.password || !params.projectId || !params.host || !params.port || !params.endpointName) {
-        return whisk.error("Missing required parameters")
-    }
-
     // customize your path here.
     if (params.pathPrefix) {
         pathPrefix = params.pathPrefix
+    }
+
+    var context = null
+    if (params.context) {
+        context = params.context
     }
 
    
@@ -118,6 +125,10 @@ function main(params) {
                             port: urlParts.port, 
                             path: urlParts.path, 
                             protocol: urlParts.protocol}
+
+                            if (context) {
+                                jsonResponse.context = context
+                            }
 
                            return whisk.done(jsonResponse)
                         }
