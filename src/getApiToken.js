@@ -111,6 +111,8 @@ function main(params) {
                 console.log('Comparing '+ entry.name + " with "+endpointName)
                 if (entry.name === endpointName) {
                     var endpoints = entry.endpoints
+
+                    console.log('Got endpoints '+endpoints)
                     for (var j = 0; j < endpoints.length; j++) {
                         var endpoint = endpoints[j]
                         if (endpoint.interface === 'public') {
